@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
-  const [filter, setFilter] = useState<string>("All");
+  const [filter, setFilter] = useState<string>("Todos");
 
   const categories = ["Todos", "Python"];
 

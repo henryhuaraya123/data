@@ -23,7 +23,7 @@ export const projects: Project[] = [
         tags: ["Python", "Pandas", "Scikit-Learn", "Matplotlib"],
         reportUrl: "https://colab.research.google.com/drive/1oGKm7nHm7NHIXGXqqJT-i8mf0HTt-KTr?usp=sharing",
         category: "Python",
-        image: "/img/p1.png",
+        image: "/data/img/p1.png",
 
     },
     {
@@ -47,7 +47,7 @@ export const projects: Project[] = [
         ],
         reportUrl: "https://colab.research.google.com/drive/1oFh3GZ6nmQ_MZlRDTAUUTa9UiYbCd36U?usp=sharing",
         category: "Python",
-        image: "/img/p2.png",
+        image: "/data/img/p2.png",
         videoUrl: "https://youtube.com"
     }
 ];
