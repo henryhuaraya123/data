@@ -48,6 +48,29 @@ export const projects: Project[] = [
         reportUrl: "https://colab.research.google.com/drive/1oFh3GZ6nmQ_MZlRDTAUUTa9UiYbCd36U?usp=sharing",
         category: "Python",
         image: "/data/img/p2.png",
-        videoUrl: "https://youtube.com"
+        videoUrl: "https://drive.google.com/file/d/102Ch7gTMHN_ikASMLn-hzFEHNkxCj7cg/view?usp=sharing"
+    },
+    {
+        id: "3",
+        title: "Reconocimiento de Plantas Medicinales de la Región de Puno mediante Redes Neuronales Convolucionales (AlexNet)",
+        description: "Este proyecto implementa una solución de visión artificial utilizando el framework PyTorch para la clasificación automática de especies de plantas medicinales originarias de Puno. El sistema utiliza una arquitectura AlexNet preentrenada, adaptando su última capa lineal (Fine-tuning) para clasificar imágenes en diversas categorías botánicas. El flujo incluye el preprocesamiento de imágenes (redimensionamiento, normalización), la gestión de datos mediante DataLoaders y la evaluación del modelo con imágenes de prueba para identificar especies como el torongil, entre otras.",
+        results: {
+            "model_architecture": "Se implementó una arquitectura basada en AlexNet con una capa final de 6 neuronas de salida para las clases específicas del estudio.",
+            "classification_performance": "El modelo demostró una alta confianza en la clasificación, logrando una probabilidad del 98.45% en la identificación de muestras específicas como el 'torongil'.",
+            "deployment_readiness": "Se desarrolló un pipeline de inferencia que permite cargar el estado del modelo entrenado ('AlexNet_model.pth') y procesar imágenes individuales mediante transformaciones de tensores para obtener diagnósticos botánicos en tiempo real."
+        },
+        tags: [
+            "PyTorch",
+            "Deep Learning",
+            "AlexNet",
+            "Computer Vision",
+            "Transfer Learning",
+            "Plant Identification",
+            "Image Processing",
+            "Python"
+        ],
+        reportUrl: "https://colab.research.google.com/drive/1KXCTBKYQxpsfnqm7x5i_HUS4TlRHJJkZ?usp=sharing",
+        category: "Python",
+        image: "/data/img/p3.png",
     }
 ];
