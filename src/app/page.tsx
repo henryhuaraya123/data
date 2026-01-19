@@ -1,65 +1,104 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { projects } from "@/lib/projects";
+import { ProjectCard } from "@/components/ProjectCard";
+import { Github, Linkedin, Mail } from "lucide-react";
+import { Badge } from "@/components/ui/Badge";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
+  const [filter, setFilter] = useState<string>("All");
+
+  const categories = ["Todos", "Python"];
+
+  const filteredProjects = filter === "Todos"
+    ? projects
+    : projects.filter(p => p.category === filter);
+
+  const iconBtnClass = "p-2 rounded-md hover:bg-zinc-900 text-zinc-400 hover:text-zinc-100 transition-colors";
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-indigo-500/30">
+      {/* Grid Pattern Background */}
+      <div className="fixed inset-0 z-0 opacity-20 pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #3f3f46 1px, transparent 0)', backgroundSize: '44px 44px' }}>
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 md:py-10">
+        {/* Header */}
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-zinc-100 mb-2">
+              <span className="text-indigo-500">PORTAFOLIO</span> DE PROYECTOS
+            </h1>
+            <p className="text-zinc-500 font-medium text-sm">
+              Analisis de Datos
+            </p>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <a href="https://github.com/henryhuaraya123" target="_blank" rel="noopener noreferrer" className={iconBtnClass}>
+              <Github className="w-5 h-5" />
+            </a>
+            <a href="mailto:hhuarayachipana@gmail.com" className={iconBtnClass}>
+              <Mail className="w-5 h-5" />
+            </a>
+          </div>
+        </header>
+
+        {/* Hero / Intro Title */}
+        <div className="mb-5">
+          {/* Filters */}
+          <div className="flex flex-wrap gap-2 mt-12">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={cn(
+                  "px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all",
+                  filter === cat
+                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/40"
+                    : "bg-zinc-900/50 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 border border-zinc-800"
+                )}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+
+        {/* Project Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map((project, idx) => (
+            <div
+              key={project.id}
+              className="animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both"
+              style={{ animationDelay: `${idx * 100}ms` }}
+            >
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </section>
+
+        {/* Empty State */}
+        {filteredProjects.length === 0 && (
+          <div className="py-20 text-center border border-dashed border-zinc-800 rounded-2xl">
+            <p className="text-zinc-500 italic">No se encontraron proyectos en esta categoría.</p>
+          </div>
+        )}
+
+        {/* Footer */}
+        <footer className="mt-32 pt-10 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6 text-zinc-500 text-xs font-medium uppercase tracking-widest">
+          <p>© {new Date().getFullYear()} Henry Denilson Huaraya Chipana</p>
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+              DEVCAT
+            </span>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
